@@ -1,0 +1,96 @@
+@import "base";
+@import "variables";
+@import "functions";
+
+.navbar {
+  height: 8vh;
+  background-color: $nav-color;
+  color: $offwhite;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  justify-content: center;
+  &-logo {
+    grid-column: 1/2;
+    font-size: 2rem;
+    justify-self: flex-start;
+    font-family: "Mr Dafoe", cursive;
+  }
+  &-links {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    grid-column: 3/4;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    font-size: 0.7rem;
+  }
+  &-link {
+    text-decoration: inherit;
+    color: inherit;
+  }
+  &-close {
+    text-decoration: inherit;
+  }
+}
+
+.hamburger {
+  font-size: 2rem;
+  display: none;
+}
+
+//Splitscreen
+
+.split {
+  height: calc(100vh - 8vh);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  &-left {
+    @include flexCenterCol;
+    grid-column: 1/2;
+    display: flex;
+    background-image: url(../src/assets/img/veg.jpg);
+    background-position: center;
+    background-size: no-repeat cover;
+  }
+  &-right {
+    @include flexCenterCol;
+    grid-column: 2/3;
+    background-image: url(../src/assets/img/fruit.jpg);
+    background-position: center;
+    background-size: no-repeat cover;
+  }
+}
+
+.title {
+  text-transform: uppercase;
+  color: $offwhite;
+}
+
+//Homepage
+.section-info {
+  height: 100vh;
+}
+
+//Media Queries
+@media screen and (max-width: 830px) {
+  .hamburger {
+    display: initial;
+    grid-column: 3/4;
+    justify-self: flex-end;
+    margin-right: 2rem;
+  }
+  .navbar-links {
+    display: none;
+  }
+  .split {
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 0fr;
+    &-left {
+      grid-row: 1/2;
+    }
+    &-right {
+      grid-row: 2/3;
+    }
+  }
+}

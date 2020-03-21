@@ -1,0 +1,44 @@
+// Margin and padding utility classes
+
+$spaces: (1, 2, 3, 4, 5, 6);
+@each $space in $spaces {
+  .m-#{$space} {
+    margin: #{$space}rem;
+  }
+  .m-t-#{$space} {
+    margin-top: #{$space}rem;
+  }
+  .m-r-#{$space} {
+    margin-right: #{$space}rem;
+  }
+  .m-b-#{$space} {
+    margin-bottom: #{$space}rem;
+  }
+  .m-l-#{$space} {
+    margin-left: #{$space}rem;
+  }
+  .p-#{$space} {
+    padding: #{$space}rem;
+  }
+  .p-t-#{$space} {
+    padding-top: #{$space}rem;
+  }
+  .p-r-#{$space} {
+    padding-right: #{$space}rem;
+  }
+  .p-b-#{$space} {
+    padding-bottom: #{$space}rem;
+  }
+  .p-l-#{$space} {
+    padding-left: #{$space}rem;
+  }
+}
+
+//Mixins
+@mixin flexCenterCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
