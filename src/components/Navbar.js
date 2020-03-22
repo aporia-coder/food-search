@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaAlignRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const [open, setOpen] = useState(false);
+
   return (
     <nav className="navbar">
       <div className="navbar-logo p-l-3">
         <li>
-          <Link to="/" className="navbar-link">
+          <Link to="/" className="navbar-name">
             StayHealthy
           </Link>
         </li>

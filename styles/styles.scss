@@ -3,7 +3,7 @@
 @import "functions";
 
 .navbar {
-  height: 8vh;
+  height: $navheight;
   background-color: $nav-color;
   color: $offwhite;
   display: grid;
@@ -13,7 +13,6 @@
   &-logo {
     grid-column: 1/2;
     font-size: 2rem;
-    justify-self: flex-start;
     font-family: "Mr Dafoe", cursive;
   }
   &-links {
@@ -23,14 +22,36 @@
     grid-column: 3/4;
     text-transform: uppercase;
     letter-spacing: 0.2rem;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
   }
   &-link {
     text-decoration: inherit;
     color: inherit;
+    position: relative;
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      transition: $maintransition;
+      transition-duration: 0.4s;
+      height: 0.2rem;
+      width: 0;
+      bottom: -0.3rem;
+      left: 0;
+      right: 0;
+      opacity: 0;
+      background-color: $pink-color;
+    }
+    &:hover {
+      &:after {
+        opacity: 1;
+        width: 100%;
+      }
+    }
   }
-  &-close {
+  &-name {
     text-decoration: inherit;
+    color: inherit;
   }
 }
 
@@ -42,23 +63,18 @@
 //Splitscreen
 
 .split {
-  height: calc(100vh - 8vh);
+  height: calc(100vh - #{$navheight});
   display: grid;
   grid-template-columns: 1fr 1fr;
   &-left {
     @include flexCenterCol;
     grid-column: 1/2;
-    display: flex;
-    background-image: url(../src/assets/img/veg.jpg);
-    background-position: center;
-    background-size: no-repeat cover;
+    background: url(../src/assets/img/veg.jpg) no-repeat center / cover;
   }
   &-right {
     @include flexCenterCol;
     grid-column: 2/3;
-    background-image: url(../src/assets/img/fruit.jpg);
-    background-position: center;
-    background-size: no-repeat cover;
+    background: url(../src/assets/img/fruit.jpg) no-repeat center 10% / cover;
   }
 }
 
@@ -85,12 +101,14 @@
   }
   .split {
     grid-template-rows: 1fr 1fr;
-    grid-template-columns: 0fr;
+    grid-template-columns: auto;
     &-left {
       grid-row: 1/2;
+      grid-column: initial;
     }
     &-right {
       grid-row: 2/3;
+      grid-column: initial;
     }
   }
 }
