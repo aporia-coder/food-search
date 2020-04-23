@@ -3,7 +3,7 @@
 @import "functions";
 
 .navbar {
-  height: $navheight;
+  height: 4rem;
   background-color: $nav-color;
   color: $offwhite;
   display: grid;
@@ -33,7 +33,7 @@
       content: "";
       position: absolute;
       transition: $maintransition;
-      transition-duration: 0.4s;
+      transition-duration: 0.3s;
       height: 0.2rem;
       width: 0;
       bottom: -0.3rem;
@@ -63,24 +63,35 @@
 //Splitscreen
 
 .split {
-  height: calc(100vh - #{$navheight});
+  height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
   &-left {
     @include flexCenterCol;
+    position: relative;
     grid-column: 1/2;
-    background: url(../src/assets/img/veg.jpg) no-repeat center / cover;
+    background: url(../src/assets/img/fruit.jpg) no-repeat center 10% / cover;
   }
   &-right {
     @include flexCenterCol;
+    position: relative;
     grid-column: 2/3;
-    background: url(../src/assets/img/fruit.jpg) no-repeat center 10% / cover;
+    background: url(../src/assets/img/veg.jpg) no-repeat center / cover;
   }
 }
 
 .title {
   text-transform: uppercase;
   color: $offwhite;
+}
+
+//Overlays
+
+//Hero
+.defaultHero {
+  background: url(../src/assets/img/berries.jpg) center center / cover no-repeat;
+  height: calc(100vh - #{$navheight});
+  @include flexCenterCol;
 }
 
 //Homepage

@@ -1,10 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import Hero from "../components/Hero";
+import Banner from "../components/Banner";
 
 const Error = () => {
   return (
-    <div>
-      <p>hello from 404</p>
-    </div>
+    <Hero>
+      <Banner title="404">
+        <Link to="/">return home</Link>
+      </Banner>
+    </Hero>
   );
 };
 

@@ -1,11 +1,8 @@
 import React from "react";
+import Hero from "../components/Hero";
 
 const Contact = () => {
-  return (
-    <div>
-      <p>Hello from Contact</p>
-    </div>
-  );
+  return <Hero />;
 };
 
 export default Contact;

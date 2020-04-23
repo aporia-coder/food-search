@@ -14,7 +14,7 @@ const Navbar = () => {
           </Link>
         </li>
       </div>
-      <FaAlignRight className="hamburger" />
+      <FaAlignRight className="hamburger" onClick={(e) => setOpen(!open)} />
       <ul className="navbar-links">
         <li>
           <Link to="/" className="navbar-link">
