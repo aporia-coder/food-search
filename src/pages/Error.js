@@ -5,11 +5,13 @@ import Banner from "../components/Banner";
 
 const Error = () => {
   return (
-    <Hero>
-      <Banner title="404">
-        <Link to="/">return home</Link>
-      </Banner>
-    </Hero>
+    <>
+      <Hero>
+        <Banner title="404">
+          <Link to="/">return home</Link>
+        </Banner>
+      </Hero>
+    </>
   );
 };
 

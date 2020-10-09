@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 
 const SplitScreen = () => {
+  const [toggleLeft, setToggleLeft] = useState(false);
+  const [toggleRight, setToggleRight] = useState(false);
   return (
     <div className="split">
-      <div className="split-left">
-        <h1 className="title">fruit</h1>
-      </div>
-      <div className="split-right">
-        <h1 className="title">veg</h1>
-      </div>
+      <div
+        className="split-left"
+        onMouseEnter={() => setToggleLeft(true)}
+        onMouseLeave={() => setToggleLeft(false)}
+      ></div>
+      <div
+        className="split-right"
+        onMouseEnter={() => setToggleRight(true)}
+        onMouseLeave={() => setToggleRight(false)}
+      ></div>
     </div>
   );
 };

@@ -42,3 +42,10 @@ $spaces: (1, 2, 3, 4, 5, 6);
   align-items: center;
   text-align: center;
 }
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}

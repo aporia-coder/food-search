@@ -3,17 +3,21 @@
 @import "functions";
 
 .navbar {
-  height: 4rem;
-  background-color: $nav-color;
-  color: $offwhite;
+  height: 3rem;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  background-color: rgb(250, 250, 250);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
   justify-content: center;
+  border-bottom: 1px solid rgba(104, 104, 104, 0.26);
   &-logo {
     grid-column: 1/2;
     font-size: 2rem;
     font-family: "Mr Dafoe", cursive;
+    transition: $maintransition;
   }
   &-links {
     display: flex;
@@ -26,14 +30,13 @@
   }
   &-link {
     text-decoration: inherit;
-    color: inherit;
+    color: rgb(29, 29, 20);
     position: relative;
     &:before,
     &:after {
       content: "";
       position: absolute;
       transition: $maintransition;
-      transition-duration: 0.3s;
       height: 0.2rem;
       width: 0;
       bottom: -0.3rem;
@@ -51,8 +54,15 @@
   }
   &-name {
     text-decoration: inherit;
-    color: inherit;
+    color: $pink-color;
   }
+}
+
+.searchbar {
+  margin-top: 1rem;
+  height: 2rem;
+  width: 15rem;
+  display: inline-block;
 }
 
 .hamburger {
@@ -64,19 +74,28 @@
 
 .split {
   height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  width: 100vw;
+  white-space: nowrap;
+  overflow-x: hidden;
+  position: relative;
+  transition: $maintransition;
   &-left {
     @include flexCenterCol;
-    position: relative;
-    grid-column: 1/2;
-    background: url(../src/assets/img/fruit.jpg) no-repeat center 10% / cover;
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    background: url(../assets/img/fruit.jpg) no-repeat center 10% / cover;
+    &-hover {
+      transform: translateX(-20%);
+    }
   }
   &-right {
     @include flexCenterCol;
-    position: relative;
-    grid-column: 2/3;
-    background: url(../src/assets/img/veg.jpg) no-repeat center / cover;
+    position: absolute;
+    left: 50%;
+    height: 100%;
+    width: 50%;
+    background: url(../assets/img/meat.jpg) no-repeat center center / cover;
   }
 }
 
@@ -87,20 +106,39 @@
 
 //Overlays
 
-//Hero
+//Heros
 .defaultHero {
-  background: url(../src/assets/img/berries.jpg) center center / cover no-repeat;
-  height: calc(100vh - #{$navheight});
+  background: url(../assets/img/berries.jpg) center center / cover no-repeat;
+  height: 100vh;
+  @include flexCenterCol;
+}
+
+.tableHero {
+  background: url(../assets/img/table.jpg) no-repeat center center / cover;
+  height: 60vh;
+  @include flexCenterCol;
+}
+
+.brandHero {
+  background-color: #fff;
+  font-family: "Mr Dafoe", cursive;
+  height: 30vh;
+  color: $pink-color;
+  font-size: 3rem;
   @include flexCenterCol;
 }
 
 //Homepage
 .section-info {
   height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  grid-gap: 1rem;
 }
 
 //Media Queries
-@media screen and (max-width: 830px) {
+@media screen and (max-width: 1320px) {
   .hamburger {
     display: initial;
     grid-column: 3/4;
@@ -122,4 +160,30 @@
       grid-column: initial;
     }
   }
+}
+
+.calorie {
+  &-paper {
+    padding: 8rem;
+  }
+  &-form {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.recipe {
+  &-grid {
+    min-height: 100vh;
+  }
+}
+
+// Recipes
+.container-slider {
+  @include flexCenter;
+  width: 5rem;
+}
+
+.diet-inputs {
+  @include flexCenter;
 }

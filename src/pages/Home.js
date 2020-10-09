@@ -4,10 +4,10 @@ import HomeInfo from "../components/HomeInfo";
 
 const Home = () => {
   return (
-    <div>
+    <>
       <SplitScreen />
       <HomeInfo />
-    </div>
+    </>
   );
 };
 

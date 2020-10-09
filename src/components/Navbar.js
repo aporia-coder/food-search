@@ -23,7 +23,12 @@ const Navbar = () => {
         </li>
         <li>
           <Link to="/products" className="navbar-link">
-            Products
+            Recipes
+          </Link>
+        </li>
+        <li>
+          <Link to="/calculator" className="navbar-link">
+            Calorie Calculator
           </Link>
         </li>
         <li>
