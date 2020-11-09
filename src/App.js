@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./styles/styles.scss";
 import { Route, Switch } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 // Pages
 import Home from "./pages/Home";
@@ -12,6 +14,7 @@ import CalorieCalculator from "./pages/CalorieCalculator";
 
 // Components
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 // MUI
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
@@ -25,6 +28,11 @@ const theme = createMuiTheme({
 });
 
 function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+    });
+  }, []);
   return (
     <ThemeProvider theme={theme}>
       <Navbar />
@@ -36,6 +44,7 @@ function App() {
         <Route exact path="/calculator" component={CalorieCalculator} />
         <Route component={Error} />
       </Switch>
+      <Footer />
     </ThemeProvider>
   );
 }

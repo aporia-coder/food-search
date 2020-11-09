@@ -1,10 +1,10 @@
 import React from "react";
 
-const Banner = ({ title, subtitle, children }) => {
+const Banner = ({ title, subtitle, full, children }) => {
   return (
-    <div className="container-banner">
-      <h2>{title}</h2>
-      <p>{subtitle}</p>
+    <div className={`p-2${full ? " flex about" : " flex"}`}>
+      <h5 className="uppercase">{title}</h5>
+      <p className="m-y-2">{subtitle}</p>
       {children}
     </div>
   );

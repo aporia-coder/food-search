@@ -1,4 +1,10 @@
 $nav-color: rgba(20, 20, 20, 0.2);
-$pink-color: #da3b6b;
+$pink-color: #da3b6bff;
+$blue-color: #002240;
 $offwhite: #e6e6e6;
 $maintransition: all 0.2s ease-in-out;
+
+@mixin btnHover {
+  background-color: $blue-color;
+  color: #fff;
+}

@@ -7,13 +7,13 @@ import DietInputs from "../components/DietInputs";
 const Products = () => {
   return (
     <>
-      <Hero hero="brandHero">
-        <Banner title="StayHealthy" />
+      <Hero hero="tableHero">
+        <h1 className="navbar-logo" id="product-logo">
+          StayHealthy
+        </h1>
+        <Banner title="our recipes" />
       </Hero>
       <DietInputs />
-      <Hero hero="tableHero">
-        <Banner title="OUR RECIPES" />
-      </Hero>
       <RecipeGrid />
     </>
   );
