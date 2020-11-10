@@ -2,7 +2,7 @@ import { SET_MEAT, SET_CALORIES } from "../types";
 
 const initialState = {
   meatPreference: "Carnivore",
-  calories: 1000,
+  calories: 1500,
 };
 
 export default function (state = initialState, action) {

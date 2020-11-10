@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import Hero from "../components/Hero";
 import Banner from "../components/Banner";
 import RecipeGrid from "../components/RecipeGrid";
-import DietInputs from "../components/DietInputs";
 
 const Products = () => {
   return (
@@ -13,7 +12,6 @@ const Products = () => {
         </h1>
         <Banner title="our recipes" />
       </Hero>
-      <DietInputs />
       <RecipeGrid />
     </>
   );
