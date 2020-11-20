@@ -6,8 +6,7 @@ import "aos/dist/aos.css";
 
 // Pages
 import Home from "./pages/Home";
-import Products from "./pages/Products";
-import SingleProduct from "./pages/SingleProduct";
+import Recipes from "./pages/Recipes";
 import Contact from "./pages/Contact";
 import Error from "./pages/Error";
 import CalorieCalculator from "./pages/CalorieCalculator";
@@ -25,6 +24,9 @@ const theme = createMuiTheme({
       main: "#da3b6b",
     },
   },
+  typography: {
+    fontFamily: `"Open Sans", serif`,
+  },
 });
 
 function App() {
@@ -38,8 +40,7 @@ function App() {
       <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/products" component={Products} />
-        <Route exact path="/products/:fooditem" component={SingleProduct} />
+        <Route exact path="/recipes" component={Recipes} />
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/calculator" component={CalorieCalculator} />
         <Route component={Error} />
@@ -50,3 +51,5 @@ function App() {
 }
 
 export default App;
+
+// State switches diet preference when recipes is clicked

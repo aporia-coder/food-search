@@ -1,21 +1,15 @@
-import { createStore, combineReducers, applyMiddleware, compose } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 
-import dietReducer from "./reducers/dietReducer";
+import dataReducer from "./reducers/dataReducer";
 
 const initialState = {};
 
-const middleware = [thunk];
-
-const reducer = combineReducers({
-  diet: dietReducer,
-});
-
 const store = createStore(
-  reducer,
+  dataReducer,
   initialState,
   compose(
-    applyMiddleware(...middleware),
+    applyMiddleware(thunk),
     window.__REDUX_DEVTOOLS_EXTENSION__ &&
       window.__REDUX_DEVTOOLS_EXTENSION__(),
   ),

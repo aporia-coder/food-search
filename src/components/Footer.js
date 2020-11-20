@@ -7,8 +7,8 @@ const Footer = () => {
   return (
     <footer>
       <div className="container grid">
-        <div class="flex">
-          <h1 class="navbar-logo m-y-2">StayHealthy</h1>
+        <div className="flex">
+          <h1 className="navbar-logo m-y-2">StayHealthy</h1>
           <p>Copyright &copy; 2020 Zachary Gray</p>
         </div>
         <div className="flex">
@@ -35,16 +35,16 @@ const Footer = () => {
         </div>
         <div className="socials">
           <a href="#">
-            <i class="fab fa-github fa-2x"></i>
+            <i className="fab fa-github fa-2x"></i>
           </a>
           <a href="#">
-            <i class="fab fa-facebook fa-2x"></i>
+            <i className="fab fa-facebook fa-2x"></i>
           </a>
           <a href="#">
-            <i class="fab fa-instagram fa-2x"></i>
+            <i className="fab fa-instagram fa-2x"></i>
           </a>
           <a href="#">
-            <i class="fab fa-twitter fa-2x"></i>
+            <i className="fab fa-twitter fa-2x"></i>
           </a>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 // Components
 import Banner from "./Banner";
@@ -20,7 +21,7 @@ const HomeInfo = () => {
         title="our recipes"
         subtitle="Whether you enjoy a delicious rib-eye steak, are completely vegan, or somewhere in between, here at StayHealthy we make it easy for you to find the most delicious, nutricous meals, all catered to your personal daily calory intake!"
       >
-        <Button name="Our Recipes" />
+        <Button name="Our Recipes" className="btn" page="/recipes" />
       </Banner>
       <img
         src={strawberry}
@@ -33,7 +34,7 @@ const HomeInfo = () => {
         title="calorie calculator"
         subtitle="Try our free calorie calculator to figure out the optimum calorific needs and get recipes tailored specifically to your calorie needs and dietary requirements!"
       >
-        <Button name="Calorie Calculator" />
+        <Button name="Calorie Calculator" className="btn" page="/calculator" />
       </Banner>
     </section>
   );

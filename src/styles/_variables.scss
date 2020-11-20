@@ -3,6 +3,7 @@ $pink-color: #da3b6bff;
 $blue-color: #002240;
 $offwhite: #e6e6e6;
 $maintransition: all 0.2s ease-in-out;
+$splittransition: all 0.4s ease-in-out;
 
 @mixin btnHover {
   background-color: $blue-color;

@@ -3,6 +3,7 @@
 @import "functions";
 
 .navbar {
+  position: relative;
   height: 3rem;
   width: 100%;
   top: 0;
@@ -31,7 +32,8 @@
   }
   &-link {
     text-decoration: inherit;
-    color: rgb(29, 29, 20);
+    // color: rgb(29, 29, 20);
+    color: $blue-color;
     position: relative;
     &:before,
     &:after {
@@ -87,7 +89,7 @@
   position: relative;
   &-left {
     @include flexCenterCol;
-    transition: $maintransition;
+    transition: $splittransition;
     position: relative;
     position: absolute;
     height: 100%;
@@ -99,7 +101,7 @@
   }
   &-right {
     @include flexCenterCol;
-    transition: $maintransition;
+    transition: $splittransition;
     position: relative;
     position: absolute;
     left: 50%;
@@ -133,15 +135,16 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(41, 19, 235, 0.459);
+  // background-color: rgba(0, 0, 0, 0.3);
   h5 {
     text-transform: uppercase;
-    color: #fff;
-    font-size: 3rem;
-    font-weight: 300;
+    color: $blue-color;
+    font-size: 2rem;
+    font-weight: 600;
   }
   i {
-    font-size: 64px;
+    font-size: 6rem;
+    color: $blue-color;
   }
 }
 
@@ -251,7 +254,9 @@
   &-diet {
     max-width: 30%;
     margin: 0 auto;
-    padding: 0 2.5rem;
+    padding: 1rem 2.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -282,8 +287,38 @@
   color: $blue-color;
   border: 3px solid $blue-color;
   transition: $maintransition;
+  &-secondary {
+    @extend .btn;
+    @include btnHover;
+    &:hover {
+      background-color: #fff;
+      color: $blue-color;
+      border: 3px solid $blue-color;
+    }
+  }
   &:hover {
     @include btnHover;
+  }
+}
+
+// Contact
+
+.form-control {
+  margin: 2rem 0;
+  input {
+    &[type="text"],
+    &[type="email"] {
+      border: 0;
+      border-bottom: 1px solid #b4becb;
+      width: 100%;
+      padding: 3px;
+      font-size: 16px;
+      transition: $maintransition;
+      &:focus {
+        outline: none;
+        border-bottom: 1px solid $pink-color;
+      }
+    }
   }
 }
 
