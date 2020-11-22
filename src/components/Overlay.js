@@ -30,9 +30,10 @@ const Overlay = ({ fruit, veg }) => {
       <h5>{fruit ? "veggie" : "meat"}</h5>
       <Button
         name={fruit ? "Veggie" : "Meat"}
+        value={fruit ? "vegetarian" : "alcohol-free"}
         className="btn-secondary"
         page="/recipes"
-        diet={"vegan"}
+        diet={true}
       />
     </div>
   );

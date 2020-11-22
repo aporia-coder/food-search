@@ -51,5 +51,3 @@ function App() {
 }
 
 export default App;
-
-// State switches diet preference when recipes is clicked

@@ -5,11 +5,13 @@ export const getRecipesAction = (search, cals, diet) => (dispatch) => {
   dispatch({ type: SET_LOADING });
   axios
     .get(
-      `https://api.edamam.com/search?q=${search}&app_id=${process.env.REACT_APP_ID}&app_key=${process.env.REACT_APP_KEY}&from=0&to=50&calories=${cals}&health=${diet}`,
+      `https://api.edamam.com/search?q=${search}&app_id=${process.env.REACT_APP_ID}&app_key=${process.env.REACT_APP_KEY}&from=0&to=50&calories=2-${cals}&health=${diet}`,
     )
     .then((res) => {
-      dispatch({ type: SET_RECIPES, payload: res.data.hits });
-      console.log(res.data.hits);
+      const newData = res.data.hits.filter((recipe, i) => {
+        return recipe.recipe.calories.toFixed(0) <= cals;
+      });
+      dispatch({ type: SET_RECIPES, payload: newData });
     })
     .catch((err) => {
       dispatch({ type: SET_ERRORS });

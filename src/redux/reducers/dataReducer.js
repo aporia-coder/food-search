@@ -10,7 +10,7 @@ const initialState = {
   recipes: [],
   loading: false,
   error: "",
-  calories: 1500,
+  calories: "2500",
   meatPreference: "alcohol-free",
 };
 

@@ -4,6 +4,9 @@ import axios from "axios";
 import dotenv from "dotenv";
 import uuid from "react-uuid";
 
+// Types
+import { SET_CALORIES } from "../redux/types";
+
 // Images
 import Spinner from "../assets/img/icons/spinner.svg";
 
@@ -21,7 +24,7 @@ import Pagination from "@material-ui/lab/Pagination";
 import { makeStyles } from "@material-ui/core/styles";
 
 // Actions
-import { setCaloriesAction } from "../redux/actions/dietActions";
+// import { setCaloriesAction } from "../redux/actions/dietActions";
 import { setMeatAction } from "../redux/actions/dietActions";
 import { getRecipesAction } from "../redux/actions/dataActions";
 
@@ -34,6 +37,7 @@ const RecipeGrid = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [recipesPerPage, setRecipesPerPage] = useState(10);
+  const initialRequest = "curry";
 
   // Pagination
   const lastRecipeIndex = currentPage * recipesPerPage;
@@ -47,12 +51,13 @@ const RecipeGrid = () => {
   }));
 
   useEffect(() => {
-    dispatch(getRecipesAction("pasta", calories, dietPreference));
+    dispatch(getRecipesAction(initialRequest, calories, dietPreference));
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(getRecipesAction(searchQuery, calories, dietPreference));
+    setCurrentPage(1);
   };
 
   // const handleCaloriesChange = (e, value) => {
@@ -103,7 +108,7 @@ const RecipeGrid = () => {
               aria-labelledby="discrete-slider-small-steps"
               valueLabelDisplay="auto"
               onChangeCommitted={(event, value) =>
-                dispatch(setCaloriesAction(value))
+                dispatch({ type: SET_CALORIES, payload: value })
               }
             />
           </div>
@@ -116,6 +121,14 @@ const RecipeGrid = () => {
             search
           </Button>
         </form>
+        <div className="flex m-y-2">
+          <Pagination
+            count={5}
+            color="primary"
+            onChange={handlePagination}
+            disabled={loading ? true : false}
+          />
+        </div>
       </div>
       <>
         {loading ? (
@@ -136,13 +149,6 @@ const RecipeGrid = () => {
                   />
                 </>
               ))}
-            </div>
-            <div className="flex m-y-2">
-              <Pagination
-                count={5}
-                color="primary"
-                onChange={handlePagination}
-              />
             </div>
           </>
         )}
