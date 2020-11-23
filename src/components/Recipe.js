@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import uuid from "react-uuid";
 
 // MUI
 import Card from "@material-ui/core/Card";
@@ -7,44 +8,78 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
 
-const RecipeDialog = ({ open }) => {
-  return (
-    <Dialog open={open}>
-      <DialogTitle>Dialog test</DialogTitle>
-    </Dialog>
-  );
-};
-
-const Recipe = ({ recipeName, calories, recipeImage, healthLabels }) => {
+const Recipe = ({
+  recipeName,
+  calories,
+  recipeImage,
+  healthLabels,
+  ingredients,
+  time,
+}) => {
   const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const useStyles = makeStyles((theme) => ({
     media: {
       height: "60%",
+      marginTop: "0.5rem",
     },
   }));
 
-  const handleOpen = () => {
-    setOpen(!open);
-  };
-
   const classes = useStyles();
+
+  const RecipeDialog = ({ open }) => {
+    console.log(healthLabels);
+    return (
+      <Dialog open={open}>
+        <DialogTitle>Ingredients:</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <ul>
+              {ingredients.map((ingredient, index) => (
+                <li>{ingredient.text}</li>
+              ))}
+            </ul>
+          </DialogContentText>
+        </DialogContent>
+        <DialogTitle>Health Warnings:</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <ul>
+              {healthLabels.map((label, index) => (
+                <li key={uuid()}>{label}</li>
+              ))}
+            </ul>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button color="primary" onClick={handleClose}>
+            close
+          </Button>
+        </DialogActions>
+      </Dialog>
+    );
+  };
 
   return (
     <>
       <Card raised={true} className="recipe-card">
-        <CardHeader
-          title={recipeName}
-          subheader={calories}
-          avatar={<Avatar>M</Avatar>}
-        />
-        <CardMedia image={recipeImage} className={classes.media} />
+        <CardHeader title={recipeName} subheader={calories} />
         <div className="flex">
           <Button
             color="primary"
@@ -57,6 +92,7 @@ const Recipe = ({ recipeName, calories, recipeImage, healthLabels }) => {
             show more
           </Button>
         </div>
+        <CardMedia image={recipeImage} className={classes.media} />
       </Card>
       <RecipeDialog open={open} />
     </>

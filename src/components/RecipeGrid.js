@@ -24,8 +24,6 @@ import Pagination from "@material-ui/lab/Pagination";
 import { makeStyles } from "@material-ui/core/styles";
 
 // Actions
-// import { setCaloriesAction } from "../redux/actions/dietActions";
-import { setMeatAction } from "../redux/actions/dietActions";
 import { getRecipesAction } from "../redux/actions/dataActions";
 
 const RecipeGrid = () => {
@@ -37,7 +35,7 @@ const RecipeGrid = () => {
   const error = useSelector((state) => state.error);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [numberOfPages, setNumberOfPages] = useState(1);
+  const [numberOfPages, setNumberOfPages] = useState(5);
   const [recipesPerPage, setRecipesPerPage] = useState(10);
   const initialRequest = "curry";
 
@@ -59,9 +57,12 @@ const RecipeGrid = () => {
 
   useEffect(() => {
     dispatch(getRecipesAction(initialRequest, calories, dietPreference));
-    setNumberOfPages(Math.ceil(recipes.length / recipesPerPage));
+    // if (recipes) {
+    //   setNumberOfPages(Math.ceil(recipes.length / recipesPerPage));
+    // }
   }, []);
 
+  console.log(recipes);
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(getRecipesAction(searchQuery, calories, dietPreference));
@@ -154,6 +155,8 @@ const RecipeGrid = () => {
                     calories={`Calories: ${recipe.recipe.calories.toFixed(0)}`}
                     recipeImage={recipe.recipe.image}
                     healthLabels={recipe.recipe.healthLabels}
+                    ingredients={recipe.recipe.ingredients}
+                    time={recipe.recipe.totalTime}
                     key={uuid()}
                   />
                 </>

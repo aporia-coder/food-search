@@ -3,6 +3,7 @@ import Hero from "../components/Hero";
 
 // MUI
 import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
 
 const Contact = () => {
   return (
@@ -25,6 +26,9 @@ const Contact = () => {
                 required
               />
             </div>
+            <Button variant="contained" color="primary">
+              send
+            </Button>
           </form>
         </Paper>
       </Hero>

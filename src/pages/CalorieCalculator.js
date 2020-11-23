@@ -12,6 +12,10 @@ import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
 
 const CalorieCalculator = () => {
   const [bodyWeight, setBodyWeight] = useState(0);
@@ -20,8 +24,9 @@ const CalorieCalculator = () => {
   const [gender, setGender] = useState("");
   const [bodyFat, setBodyFat] = useState();
   const [activityLevel, setActivityLevel] = useState("");
-  const bodyFatVals = ["10-14", "15-20", "21-28", "Over 28"];
   const genders = ["Male", "Female"];
+  const [bmr, setBmr] = useState(0);
+  const [open, setOpen] = useState(false);
   const activityLevelVals = [
     "Sedentary",
     "Light",
@@ -29,7 +34,6 @@ const CalorieCalculator = () => {
     "Active",
     "Very Active",
   ];
-  const [bmr, setBmr] = useState(0);
 
   const calculateBmr = (gender, bodyWeight, heightCm, age) => {
     if (gender == "Male") {
@@ -68,6 +72,35 @@ const CalorieCalculator = () => {
     }
   };
 
+  const [calories, setCalories] = useState(0);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const CalorieDialog = ({ open }) => {
+    return (
+      <Dialog open={open}>
+        <DialogTitle>Calorie Dialog</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Your Basal Metabolic Rate is ${bmr}, meaning the amount of calories
+            required daily to lose weight is ${calories}. Click below for
+            recipes that can help you with your weight loss.
+          </DialogContentText>
+        </DialogContent>
+        <Button color="primary">recipes</Button>
+        <Button onClick={handleClose} color="primary">
+          close
+        </Button>
+      </Dialog>
+    );
+  };
+
   return (
     <>
       <Hero>
@@ -103,17 +136,11 @@ const CalorieCalculator = () => {
             <FormControl>
               <TextField
                 select
-                value={bodyFat}
-                helperText="Select your body fat percentage"
+                value={heightCm}
+                helperText="Select your age"
                 required={true}
-                onChange={(e) => setBodyFat(e.target.value)}
-              >
-                {bodyFatVals.map((fat) => (
-                  <MenuItem key={fat} value={fat}>
-                    {fat}
-                  </MenuItem>
-                ))}
-              </TextField>
+                onChange={(e) => setHeightCm(e.target.value)}
+              ></TextField>
             </FormControl>
             <FormControl>
               <TextField
@@ -130,12 +157,18 @@ const CalorieCalculator = () => {
                 ))}
               </TextField>
             </FormControl>
-            <Button variant="contained" color="primary" className="m-y-2">
+            <Button
+              variant="contained"
+              color="primary"
+              className="p-y-2"
+              onClick={handleOpen}
+            >
               calculate calories
             </Button>
           </form>
         </Paper>
       </Hero>
+      <CalorieDialog open={open} />
     </>
   );
 };

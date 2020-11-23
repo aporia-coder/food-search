@@ -13,10 +13,12 @@ const Overlay = ({ fruit, veg }) => {
   useEffect(() => {
     gsap.from(fruitRef.current, {
       y: "-20%",
+      skewX: "-10%",
       duration: 0.5,
     });
     gsap.from(meatRef.current, {
       y: "-20%",
+      skewX: "10%",
       duration: 0.5,
     });
   }, []);

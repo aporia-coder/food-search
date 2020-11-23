@@ -2,8 +2,8 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-// Actions
-import { setMeatAction } from "../redux/actions/dietActions";
+// Types
+import { SET_MEAT } from "../redux/types";
 
 const Button = ({ name, className, page, diet, value }) => {
   const history = useHistory();
@@ -11,7 +11,7 @@ const Button = ({ name, className, page, diet, value }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (diet) {
-      dispatch(setMeatAction(value));
+      dispatch({ type: SET_MEAT, payload: value });
     }
     history.push(page);
   };
