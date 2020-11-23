@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import uuid from "react-uuid";
 
 // Types
-import { SET_CALORIES } from "../redux/types";
+import { SET_CALORIES, SET_MEAT } from "../redux/types";
 
 // Images
 import Spinner from "../assets/img/icons/spinner.svg";
@@ -34,15 +34,18 @@ const RecipeGrid = () => {
   const dietPreference = useSelector((state) => state.meatPreference);
   const calories = useSelector((state) => state.calories);
   const loading = useSelector((state) => state.loading);
+  const error = useSelector((state) => state.error);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [numberOfPages, setNumberOfPages] = useState(1);
   const [recipesPerPage, setRecipesPerPage] = useState(10);
   const initialRequest = "curry";
 
   // Pagination
-  const lastRecipeIndex = currentPage * recipesPerPage;
-  const firstRecipeIndex = lastRecipeIndex - recipesPerPage;
-  const currentRecipes = recipes.slice(firstRecipeIndex, lastRecipeIndex);
+  // let numberOfPages = Math.ceil(recipes.length / recipesPerPage);
+  let lastRecipeIndex = currentPage * recipesPerPage;
+  let firstRecipeIndex = lastRecipeIndex - recipesPerPage;
+  let currentRecipes = recipes.slice(firstRecipeIndex, lastRecipeIndex);
 
   const useStyles = makeStyles((theme) => ({
     progress: {
@@ -50,14 +53,19 @@ const RecipeGrid = () => {
     },
   }));
 
+  // const setPages = () => {
+  //   setNumberOfPages(Math.ceil(recipes.length / recipesPerPage));
+  // };
+
   useEffect(() => {
     dispatch(getRecipesAction(initialRequest, calories, dietPreference));
+    setNumberOfPages(Math.ceil(recipes.length / recipesPerPage));
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(getRecipesAction(searchQuery, calories, dietPreference));
-    setCurrentPage(1);
+    handlePagination();
   };
 
   // const handleCaloriesChange = (e, value) => {
@@ -87,7 +95,7 @@ const RecipeGrid = () => {
               label="Diet"
               value={dietPreference}
               onChange={(e) =>
-                dispatch({ type: "SET_MEAT", payload: e.target.value })
+                dispatch({ type: SET_MEAT, payload: e.target.value })
               }
             >
               <option value="vegan">Vegan</option>
@@ -100,10 +108,10 @@ const RecipeGrid = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <div>
-            <p>Calories</p>
+            <p className="p-x-2">Calories</p>
             <Slider
               defaultValue={calories}
-              min={0}
+              min={2}
               max={3000}
               aria-labelledby="discrete-slider-small-steps"
               valueLabelDisplay="auto"
@@ -121,9 +129,10 @@ const RecipeGrid = () => {
             search
           </Button>
         </form>
+        {error && <h5 className="center">{error}</h5>}
         <div className="flex m-y-2">
           <Pagination
-            count={5}
+            count={numberOfPages}
             color="primary"
             onChange={handlePagination}
             disabled={loading ? true : false}

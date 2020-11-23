@@ -15,15 +15,15 @@ const Contact = () => {
               <input type="text" name="name" placeholder="Name" required />
             </div>
             <div className="form-control">
+              <input type="email" name="email" placeholder="Email" required />
+            </div>
+            <div className="form-control">
               <input
                 type="text"
                 name="message"
                 placeholder="Message"
                 required
               />
-            </div>
-            <div className="form-control">
-              <input type="email" name="email" placeholder="Email" required />
             </div>
           </form>
         </Paper>

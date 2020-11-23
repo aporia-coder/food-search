@@ -9,29 +9,31 @@
   top: 0;
   z-index: 100;
   background-color: rgb(250, 250, 250);
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid rgba(104, 104, 104, 0.26);
   &-logo {
-    grid-column: 1/2;
     color: $pink-color;
     font-size: 2rem;
     font-family: "Mr Dafoe", cursive;
     transition: $maintransition;
   }
+  &-container {
+    max-width: 1700px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
   &-links {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    grid-column: 3/4;
+    justify-content: space-between;
     text-transform: uppercase;
     letter-spacing: 0.2rem;
     font-size: 0.75rem;
   }
   &-link {
     text-decoration: inherit;
+    margin: 0 1rem;
     // color: rgb(29, 29, 20);
     color: $blue-color;
     position: relative;
@@ -178,7 +180,7 @@
 }
 
 //Media Queries
-@media screen and (max-width: 1320px) {
+@media screen and (max-width: 1000px) {
   .hamburger {
     display: initial;
     grid-column: 3/4;
@@ -250,9 +252,11 @@
   &-recipe {
     @extend .container;
     max-width: 95%;
+    padding-bottom: 1rem;
   }
   &-diet {
-    max-width: 30%;
+    max-width: 1200px;
+    flex-wrap: wrap;
     margin: 0 auto;
     padding: 1rem 2.5rem;
     border-top: 1px solid rgba(0, 0, 0, 0.2);

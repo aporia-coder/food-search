@@ -7,36 +7,38 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <div className="navbar-logo p-l-3">
-        <li>
-          <Link to="/" className="navbar-name">
-            StayHealthy
-          </Link>
-        </li>
+      <div className="flex-row navbar-container">
+        <div className="navbar-logo p-l-3">
+          <li>
+            <Link to="/" className="navbar-name">
+              StayHealthy
+            </Link>
+          </li>
+        </div>
+        <FaAlignRight className="hamburger" onClick={(e) => setOpen(!open)} />
+        <ul className="navbar-links">
+          <li>
+            <Link to="/" className="navbar-link">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/recipes" className="navbar-link">
+              Recipes
+            </Link>
+          </li>
+          <li>
+            <Link to="/calculator" className="navbar-link">
+              Calorie Calculator
+            </Link>
+          </li>
+          <li>
+            <Link to="/contact" className="navbar-link">
+              Contact
+            </Link>
+          </li>
+        </ul>
       </div>
-      <FaAlignRight className="hamburger" onClick={(e) => setOpen(!open)} />
-      <ul className="navbar-links">
-        <li>
-          <Link to="/" className="navbar-link">
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link to="/recipes" className="navbar-link">
-            Recipes
-          </Link>
-        </li>
-        <li>
-          <Link to="/calculator" className="navbar-link">
-            Calorie Calculator
-          </Link>
-        </li>
-        <li>
-          <Link to="/contact" className="navbar-link">
-            Contact
-          </Link>
-        </li>
-      </ul>
     </nav>
   );
 };

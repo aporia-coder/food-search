@@ -8,6 +8,7 @@ import Button from "./Button";
 const Overlay = ({ fruit, veg }) => {
   const fruitRef = useRef(null);
   const meatRef = useRef(null);
+  const buttonRef = useRef(null);
 
   useEffect(() => {
     gsap.from(fruitRef.current, {
@@ -31,7 +32,7 @@ const Overlay = ({ fruit, veg }) => {
       <Button
         name={fruit ? "Veggie" : "Meat"}
         value={fruit ? "vegetarian" : "alcohol-free"}
-        className="btn-secondary"
+        className="btn-secondary m-t-1"
         page="/recipes"
         diet={true}
       />

@@ -1,7 +1,9 @@
 import axios from "axios";
 import { SET_LOADING, SET_RECIPES, SET_ERRORS } from "../types";
 
-export const getRecipesAction = (search, cals, diet) => (dispatch) => {
+export const getRecipesAction = (search, cals, diet, recipesPerPage) => (
+  dispatch,
+) => {
   dispatch({ type: SET_LOADING });
   axios
     .get(

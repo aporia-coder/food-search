@@ -10,8 +10,9 @@ const initialState = {
   recipes: [],
   loading: false,
   error: "",
-  calories: "2500",
+  calories: "3000",
   meatPreference: "alcohol-free",
+  currentPage: 1,
 };
 
 export default function (state = initialState, action) {
@@ -26,12 +27,14 @@ export default function (state = initialState, action) {
         ...state,
         recipes: [...action.payload],
         loading: false,
+        currentPage: 1,
+        error: "",
       };
     case SET_ERRORS:
       return {
         ...state,
         loading: false,
-        error: "Please wait a few seconds and try again",
+        error: "Please wait a few seconds and try searching again",
       };
     case SET_MEAT:
       return {

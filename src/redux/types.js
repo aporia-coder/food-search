@@ -6,3 +6,4 @@ export const SET_CALORIES = "SET_CALORIES";
 export const SET_LOADING = "SET_LOADING";
 export const SET_RECIPES = "SET_RECIPES";
 export const SET_ERRORS = "SET_ERRORS";
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
