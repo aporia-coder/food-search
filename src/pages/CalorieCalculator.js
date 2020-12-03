@@ -1,7 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 // Components
 import Hero from "../components/Hero";
+
+// Actions
+import { calculateCaloriesAction } from "../redux/actions/dataActions";
+
+// Types
+import { SET_CALORIES } from "../redux/types";
 
 // MUI
 import Paper from "@material-ui/core/Paper";
@@ -16,16 +24,21 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
+import Typography from "@material-ui/core/Typography";
 
 const CalorieCalculator = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const [bodyWeight, setBodyWeight] = useState(0);
   const [heightCm, setHeightCm] = useState(0);
-  const [age, setAge] = useState(0);
+  const calories = useSelector((state) => state.calories);
+  // const [calories, setCalories] = useState(0);
+  const [age, setAge] = useState(26);
   const [gender, setGender] = useState("");
   const [bodyFat, setBodyFat] = useState();
   const [activityLevel, setActivityLevel] = useState("");
   const genders = ["Male", "Female"];
-  const [bmr, setBmr] = useState(0);
+  const [bmr, setBmr] = useState(1600);
   const [open, setOpen] = useState(false);
   const activityLevelVals = [
     "Sedentary",
@@ -35,44 +48,13 @@ const CalorieCalculator = () => {
     "Very Active",
   ];
 
-  const calculateBmr = (gender, bodyWeight, heightCm, age) => {
+  const calculateBmr = (gender, bodyWeight, heightCm, age, activityLevel) => {
     if (gender == "Male") {
       setBmr(66 + 13.7 * bodyWeight + 5 * heightCm - 6.8 * age);
     } else if (gender == "Female") {
       setBmr(655 + 9.6 * bodyWeight + 1.8 * heightCm - 4.7 * age);
     }
-    console.log(bmr);
   };
-
-  // Height is in cm
-
-  // calculateBmr("Male", 85, 182.88, 26);
-
-  // To lose weight minus 500 calories
-
-  const calculateCalories = (bmr) => {
-    switch (activityLevelVals) {
-      case "Sedentary":
-        return bmr * 1.2;
-        break;
-      case "Light":
-        return bmr * 1.375;
-        break;
-      case "Moderate":
-        return bmr * 1.55;
-        break;
-      case "Active":
-        return bmr * 1.725;
-        break;
-      case "Very Active":
-        return bmr * 1.9;
-        break;
-      default:
-        console.log("some kind of error");
-    }
-  };
-
-  const [calories, setCalories] = useState(0);
 
   const handleOpen = () => {
     setOpen(true);
@@ -82,18 +64,33 @@ const CalorieCalculator = () => {
     setOpen(false);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    calculateBmr(gender, bodyWeight, heightCm, age);
+    dispatch(calculateCaloriesAction(bmr, activityLevel));
+  };
+
+  const handleRecipes = (e) => {
+    e.preventDefault();
+    dispatch({ type: SET_CALORIES, payload: calories - 500 });
+    history.push("/recipes");
+  };
+
   const CalorieDialog = ({ open }) => {
     return (
       <Dialog open={open}>
-        <DialogTitle>Calorie Dialog</DialogTitle>
+        <DialogTitle>Your Calories</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Your Basal Metabolic Rate is ${bmr}, meaning the amount of calories
-            required daily to lose weight is ${calories}. Click below for
-            recipes that can help you with your weight loss.
+            Your Basal Metabolic Rate is <b>{calories}</b> calories, meaning the
+            amount of calories required daily to lose weight is{" "}
+            <b>{calories - 500}</b>. Click below for recipes that can help you
+            with your weight loss.
           </DialogContentText>
         </DialogContent>
-        <Button color="primary">recipes</Button>
+        <Button color="primary" onClick={handleRecipes}>
+          recipes
+        </Button>
         <Button onClick={handleClose} color="primary">
           close
         </Button>
@@ -105,7 +102,12 @@ const CalorieCalculator = () => {
     <>
       <Hero>
         <Paper elevation={3} className="calorie-paper">
-          <form noValidate autoComplete="off" className="calorie-form">
+          <form
+            noValidate
+            autoComplete="off"
+            className="calorie-form"
+            onSubmit={handleSubmit}
+          >
             <h5>CALORIE CALCULATOR</h5>
             <FormControl>
               <Input
@@ -134,13 +136,17 @@ const CalorieCalculator = () => {
               </TextField>
             </FormControl>
             <FormControl>
-              <TextField
+              <Input
                 select
                 value={heightCm}
                 helperText="Select your age"
                 required={true}
                 onChange={(e) => setHeightCm(e.target.value)}
-              ></TextField>
+                endAdornment={
+                  <InputAdornment position="end">Cm</InputAdornment>
+                }
+              ></Input>
+              <FormHelperText>Height</FormHelperText>
             </FormControl>
             <FormControl>
               <TextField
@@ -160,7 +166,8 @@ const CalorieCalculator = () => {
             <Button
               variant="contained"
               color="primary"
-              className="p-y-2"
+              className="m-y-2"
+              type="submit"
               onClick={handleOpen}
             >
               calculate calories

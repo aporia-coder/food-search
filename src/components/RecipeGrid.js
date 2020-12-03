@@ -51,35 +51,22 @@ const RecipeGrid = () => {
     },
   }));
 
-  // const setPages = () => {
-  //   setNumberOfPages(Math.ceil(recipes.length / recipesPerPage));
-  // };
-
   useEffect(() => {
     dispatch(getRecipesAction(initialRequest, calories, dietPreference));
-    // if (recipes) {
-    //   setNumberOfPages(Math.ceil(recipes.length / recipesPerPage));
-    // }
   }, []);
 
-  console.log(recipes);
+  useEffect(() => {
+    setCurrentPage(1);
+    setNumberOfPages(Math.ceil(recipes.length / recipesPerPage));
+  }, [recipes]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(getRecipesAction(searchQuery, calories, dietPreference));
-    handlePagination();
   };
 
-  // const handleCaloriesChange = (e, value) => {
-  //   dispatch(setCaloriesAction(value));
-  //   dispatch(getRecipesAction(searchQuery, calories, dietPreference));
-  // };
-
-  // const handleMeatChange = (e) => {
-  //   dispatch(setMeatAction(e.target.value));
-  //   dispatch(getRecipesAction(searchQuery, calories, dietPreference));
-  // };
-
   const handlePagination = (event, value) => {
+    setNumberOfPages(Math.ceil(recipes.length / recipesPerPage));
     setCurrentPage(value);
   };
 
@@ -113,7 +100,7 @@ const RecipeGrid = () => {
             <Slider
               defaultValue={calories}
               min={2}
-              max={3000}
+              max={4000}
               aria-labelledby="discrete-slider-small-steps"
               valueLabelDisplay="auto"
               onChangeCommitted={(event, value) =>

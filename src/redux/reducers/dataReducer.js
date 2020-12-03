@@ -12,7 +12,6 @@ const initialState = {
   error: "",
   calories: "3000",
   meatPreference: "alcohol-free",
-  currentPage: 1,
 };
 
 export default function (state = initialState, action) {
@@ -27,7 +26,6 @@ export default function (state = initialState, action) {
         ...state,
         recipes: [...action.payload],
         loading: false,
-        currentPage: 1,
         error: "",
       };
     case SET_ERRORS:
@@ -44,7 +42,7 @@ export default function (state = initialState, action) {
     case SET_CALORIES:
       return {
         ...state,
-        calories: action.payload,
+        calories: Math.floor(action.payload),
       };
     default:
       return initialState;
