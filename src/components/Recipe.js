@@ -35,16 +35,16 @@ const Recipe = ({
   };
 
   const useStyles = makeStyles((theme) => ({
-    media: {
-      height: "60%",
-      marginTop: "0.5rem",
+    image: {
+      objectFit: "cover",
+      width: "100%",
+      height: "100%",
     },
   }));
 
   const classes = useStyles();
 
   const RecipeDialog = ({ open }) => {
-    console.log(healthLabels);
     return (
       <Dialog open={open}>
         <DialogTitle>Ingredients:</DialogTitle>
@@ -80,11 +80,10 @@ const Recipe = ({
     <>
       <Card raised={true} className="recipe-card">
         <CardHeader title={recipeName} subheader={calories} />
-        <div className="flex">
+        <div className="flex m-y-1">
           <Button
             color="primary"
             variant="outlined"
-            className="m-t-2"
             size="small"
             onClick={handleOpen}
             endIcon={<ExpandMoreIcon />}
@@ -92,7 +91,7 @@ const Recipe = ({
             show more
           </Button>
         </div>
-        <CardMedia image={recipeImage} className={classes.media} />
+        <CardMedia image={recipeImage} className={classes.image} />
       </Card>
       <RecipeDialog open={open} />
     </>

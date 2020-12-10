@@ -30,7 +30,8 @@ const Overlay = ({ fruit, veg }) => {
       ) : (
         <i class="las la-pizza-slice" ref={meatRef}></i>
       )}
-      <h5>{fruit ? "veggie" : "meat"}</h5>
+      {/* <h5>{fruit ? "veggie" : "meat"}</h5> */}
+      <h5></h5>
       <Button
         name={fruit ? "Veggie" : "Meat"}
         value={fruit ? "vegetarian" : "alcohol-free"}
